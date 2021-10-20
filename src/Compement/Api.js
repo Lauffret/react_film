@@ -46,7 +46,7 @@ const Api = (props) => {
                                 return (
                                     <div>
                                         <Container>
-                                            {<MovieRaw raw={res} />}
+                                            { res.media_type?(res.media_type =="movie"? <MovieRaw raw={res} /> :""): <MovieRaw raw={res} /> }
                                         </Container>
                                     </div>
                                 )
@@ -61,7 +61,7 @@ const Api = (props) => {
                             film.map(video => {
                                 return (
                                     <div>
-                                        <Video video={film} />
+                                        <Video video={video} />
                                     </div>
                                 )
                             })
