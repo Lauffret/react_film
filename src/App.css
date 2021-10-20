@@ -18,6 +18,8 @@
 }
 
 .row {
-  text-align: center;
   padding: 5px;
+}
+.col{
+  padding: 75px;
 }

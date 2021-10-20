@@ -22,7 +22,7 @@ const PopularScreen = () =>{
   return(
     <div className="App">
       <MyNavBar/>
-      Film trier par popularité
+      <h1>Film trier par popularité</h1>
       <Api param = {"&page=1"}/>
     </div>
   )
@@ -55,7 +55,7 @@ const VideoMovieScreen = (props) =>{
 
 function App() {
   return (
-    <div>
+    <div className="App">
         <BrowserRouter>
           <Route  exact path = "/" component = {HomeScreen}/> 
           <Switch>

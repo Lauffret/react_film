@@ -9,8 +9,8 @@ const MovieRaw = (props) => {
         <div>
             <Row className="row">
                 <Col md={4}><Image thumbnail  fluid  src={"https://image.tmdb.org/t/p/w500" + props.raw.backdrop_path} alt={"Image du film " + props.raw.title} /></Col>
-                <Col md={5}><h3>{props.raw.title}</h3></Col>
-                <Col md={2}><Link to={"/movie/" + props.raw.id}><Button variant="secondary">Plus de Detail <AiOutlineRight/></Button></Link></Col>
+                <Col md={5} className="col"><h3>{props.raw.title}</h3></Col>
+                <Col md={2} className="col"><Link to={"/movie/" + props.raw.id}><Button variant="secondary">Plus de Detail <AiOutlineRight/></Button></Link></Col>
             </Row>
         </div>
     );

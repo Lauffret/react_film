@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DetailMovie from './DetailMovie';
 import MovieRaw from './MovieRaw';
 import Video from './Video';
-import { Carousel, Container } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 
 
 const Api = (props) => {
@@ -23,14 +23,8 @@ const Api = (props) => {
     useEffect(() => {
         fetch("https://api.themoviedb.org/3" + pathname + "?api_key=e3e3d29c3d379923c3ef3321c35b73c0&language=fr" + param)
             .then(res => { return res.json() })
-            .then((res) => {
-                if (!!res.results) {
-                    setFilm(res.results)
-
-                } else {
-                    setFilm(res)
-                }
-            }).catch(function (error) {
+            .then((res) => { res.results?setFilm(res.results):setFilm(res)})
+            .catch(function (error) {
                 console.log(error);
             })
 
@@ -46,7 +40,7 @@ const Api = (props) => {
                                 return (
                                     <div>
                                         <Container>
-                                            { res.media_type?(res.media_type =="movie"? <MovieRaw raw={res} /> :""): <MovieRaw raw={res} /> }
+                                            {res.media_type ? (res.media_type === "movie" ? <MovieRaw raw={res} /> : "") : <MovieRaw raw={res} />}
                                         </Container>
                                     </div>
                                 )
@@ -56,17 +50,7 @@ const Api = (props) => {
                 );
             case "video":
                 return (
-                    <div>
-                        {
-                            film.map(video => {
-                                return (
-                                    <div>
-                                        <Video video={video} />
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
+                    <Video video={film} />
                 );
             case "film":
                 return (
@@ -74,6 +58,8 @@ const Api = (props) => {
                         {<DetailMovie film={film} />}
                     </div>
                 );
+            default:
+                ;
         }
 
     } else {
