@@ -1,23 +1,70 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter,Route, Switch } from 'react-router-dom';
+import Api from './Compement/Api';
+import SearchBar from './Compement/SearchBar';
+import MyNavBar from './Compement/MyNavBar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+
+const HomeScreen = () =>{
+  return(
+    <div className="App">
+      <MyNavBar/>
+      <header className="App-header">
+          <h1>Site Film</h1>
+      </header>
+    </div>
+  )
+}
+
+const PopularScreen = () =>{
+  return(
+    <div className="App">
+      <MyNavBar/>
+      Film trier par popularité
+      <Api param = {"&page=1"}/>
+    </div>
+  )
+}
+const SearchScreen = () =>{
+  return(
+    <div className="App">
+      <MyNavBar/>  
+      <SearchBar/>
+    </div>
+  )
+}
+const DetailMovieScreen = (props) =>{
+  return(
+    <div className="App">
+      <MyNavBar/>
+      <Api/>
+    </div>
+  )
+}
+const VideoMovieScreen = (props) =>{
+  return(
+    <div className="App">
+      <MyNavBar/>
+      <Api/>
+    </div>
+  )
+}
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+        <BrowserRouter>
+          <Route  exact path = "/" component = {HomeScreen}/> 
+          <Switch>
+            <Route path = "/movie/popular" exact component = {PopularScreen}/>  
+            <Route  exact path = "/movie/:ID_FILM" component = {DetailMovieScreen}/>
+          </Switch>
+          <Route path='/movie/:ID_FILM/videos' component={VideoMovieScreen} /> 
+          <Route path = "/search/multi" component = {SearchScreen}/>
+        </BrowserRouter>
     </div>
   );
 }
